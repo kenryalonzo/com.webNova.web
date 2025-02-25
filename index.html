@@ -1,15 +1,231 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
 
-    
-    <!-- <div id="app"></div>
-    <script type="module" src="/src/main.js"></script> -->
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Webnova CV</title>
+  <link rel="stylesheet" href="/src/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+</head>
+
+<body class="font-inter">
+
+  <header class="header">
+    <nav class="bg-white shadow-md py-4">
+      <div class="container mx-auto px-6 flex justify-between items-center">
+        <a href="#" class="flex items-center text-xl font-semibold text-gray-800">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-blue-600" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          Webnova
+        </a>
+        <div class="hidden md:flex space-x-4">
+        </div>
+        <div class="">
+          <button id="menu-toggle" class="text-gray-600 hover:text-blue-600 focus:outline-none focus:text-blue-600">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div id="mobile-menu" class="hidden md:hidden bg-white shadow-md mt-2">
+      </div>
+    </nav>
+
+    <section class="bg-gradient-to-r from-blue-100 to-blue-50 py-20">
+      <div class="container mx-auto px-6 text-center">
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">Créez un CV professionnel en quelques minutes</h1>
+        <p class="text-lg text-gray-600 mb-8">Des modèles modernes et personnalisables pour vous démarquer.</p>
+        <a href="#"
+          class="px-8 py-3 bg-blue-600 text-white rounded-full text-lg font-semibold hover:bg-blue-700 transition duration-300">Commencer
+          maintenant</a>
+      </div>
+    </section>
+  </header>
+
+  <section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-semibold text-gray-800 mb-6">Comment ça marche</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300">
+          <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-800 mb-2">Choisissez un modèle</h3>
+          <p class="text-gray-600">Parcourez notre sélection de modèles professionnels et choisissez celui qui vous
+            convient.</p>
+        </div>
+        <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300">
+          <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15.172a2 2 0 01-2.828 0L4.586 10.414a2 2 0 010-2.828l7.242-7.242z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-800 mb-2">Personnalisez</h3>
+          <p class="text-gray-600">Ajoutez vos informations, modifiez les couleurs et les polices pour créer un CV
+            unique.</p>
+        </div>
+        <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300">
+          <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L4 8m4-4v12" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-800 mb-2">Téléchargez</h3>
+          <p class="text-gray-600">Téléchargez votre CV au format PDF et partagez-le facilement avec les employeurs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-semibold text-gray-800 mb-12">Modèles Populaires</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div
+          class="group relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-500 transform hover:-translate-y-2">
+          <img src="./public/assets/images/Basic.jpg" alt="Modèle Classique"
+            class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+            <h3 class="text-xl font-semibold text-white mb-2">Modèle Classique</h3>
+            <p class="text-gray-300 mb-4">Un modèle élégant et professionnel pour toutes les occasions.</p>
+            <a href="#"
+              class="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors duration-300">Voir
+              le modèle</a>
+          </div>
+        </div>
+        <div
+          class="group relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-500 transform hover:-translate-y-2">
+          <img src="./public/assets/images/College.jpg" alt="Modèle Moderne"
+            class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+            <h3 class="text-xl font-semibold text-white mb-2">Modèle Moderne</h3>
+            <p class="text-gray-300 mb-4">Un design contemporain pour les esprits créatifs.</p>
+            <a href="#"
+              class="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors duration-300">Voir
+              le modèle</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-gray-100">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-semibold text-gray-800 mb-12">Ce que nos clients disent</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <div class="flex items-center justify-center mb-4">
+            <img src="chemin/vers/avatar1.jpg" alt="Client 1" class="w-16 h-16 rounded-full object-cover">
+          </div>
+          <p class="text-gray-600 mb-4">"J'ai créé un CV professionnel en quelques minutes. Les modèles sont modernes et
+            faciles à personnaliser."</p>
+          <h3 class="text-lg font-semibold text-gray-800">- Marie Dupont</h3>
+        </div>
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <div class="flex items-center justify-center mb-4">
+            <img src="chemin/vers/avatar2.jpg" alt="Client 2" class="w-16 h-16 rounded-full object-cover">
+          </div>
+          <p class="text-gray-600 mb-4">"Les modèles sont de haute qualité et le processus de création est très
+            intuitif. Je recommande vivement ce site."</p>
+          <h3 class="text-lg font-semibold text-gray-800">- Jean Martin</h3>
+        </div>
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <div class="flex items-center justify-center mb-4">
+            <img src="chemin/vers/avatar3.jpg" alt="Client 3" class="w-16 h-16 rounded-full object-cover">
+          </div>
+          <p class="text-gray-600 mb-4">"Grâce à ce site, j'ai obtenu plus d'entretiens. Mon CV a fait forte impression
+            auprès des recruteurs."</p>
+          <h3 class="text-lg font-semibold text-gray-800">- Sophie Leduc</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-blue-500 text-white">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-semibold mb-8">Prêt à créer votre CV professionnel ?</h2>
+      <p class="text-lg mb-8">Rejoignez des milliers de personnes qui ont déjà créé leur CV avec nous.</p>
+      <a href="#"
+        class="inline-block px-8 py-3 bg-white text-blue-600 rounded-full text-lg font-semibold hover:bg-gray-100 transition duration-300">Commencer
+        maintenant</a>
+    </div>
+  </section>
+
+  <footer class="bg-gray-800 text-white py-12">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-lg font-semibold mb-4">À propos</h3>
+          <p class="text-gray-300">Webnova est une plateforme qui vous aide à créer des CV professionnels en quelques
+            minutes. Nos modèles sont conçus pour impressionner les recruteurs.</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Liens utiles</h3>
+          <ul class="text-gray-300 space-y-2">
+            <li><a href="#" class="hover:text-white">Modèles</a></li>
+            <li><a href="#" class="hover:text-white">Fonctionnalités</a></li>
+            <li><a href="#" class="hover:text-white">Tarifs</a></li>
+            <li><a href="#" class="hover:text-white">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Contact</h3>
+          <p class="text-gray-300">Email : contact@webnova.com</p>
+          <p class="text-gray-300">Téléphone : +237 6 51 28 12 24</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Suivez-nous</h3>
+          <div class="flex space-x-4">
+            <a href="#" class="hover:text-white"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="hover:text-white"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="mt-8 border-t border-gray-700 pt-8 text-center">
+        <p class="text-gray-300">&copy; 2025 Webnova. Tous droits réservés.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('menu-toggle').addEventListener('click', function () {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+    crossorigin="anonymous"></script>
+
+  <!-- module -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+
 </html>
