@@ -21,266 +21,112 @@ function previewImage(event) {
 
 // add achievement sections
 
-document.addEventListener('DOMContentLoaded', function() {
-    const addAchievementButton = document.getElementById('add-achievement');
-    const achievementsContainer = document.getElementById('achievements-container');
+// 
 
-    addAchievementButton.addEventListener('click', function() {
-        const newAchievement = document.createElement('div');
-        newAchievement.className = 'mb-4';
-        newAchievement.innerHTML = `
-            <div class="grid sm:grid-cols-1 md:grid-cols-2 gap-4 items-center mb-2">
-                <div>
-                    <label class="text-gray-700 font-medium">Title</label>
-                    <input type="text"
-                        class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition-all duration-200"
-                        placeholder="Enter title">
-                </div>
-                <div>
-                    <label class="text-gray-700 font-medium">Description</label>
-                    <input type="text"
-                        class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition-all duration-200"
-                        placeholder="Enter description">
-                </div>
+document.addEventListener('DOMContentLoaded', function () {
+    const sections = [
+        { buttonId: 'add-achievement', containerId: 'achievements-container', fields: ['achievementTitle', 'achievementDesc'] },
+        { buttonId: 'add-experience', containerId: 'experience-container', fields: ['experienceTitle', 'company', 'location', 'startDate', 'endDate', 'experienceDesc'] },
+        { buttonId: 'add-education', containerId: 'education-container', fields: ['school', 'degree', 'city', 'eduStartDate', 'eduEndDate', 'eduDesc'] },
+        { buttonId: 'add-project', containerId: 'projects-container', fields: ['projectName', 'projectLink', 'projectDesc'] },
+        { buttonId: 'add-skill', containerId: 'skills-container', fields: ['skill'] }
+    ];
+
+    sections.forEach(section => {
+        const addButton = document.getElementById(section.buttonId);
+        const container = document.getElementById(section.containerId);
+
+        if (!addButton || !container) return; // Sécurité pour éviter les erreurs si un élément est absent
+
+        addButton.addEventListener('click', function () {
+            const lastEntry = container.lastElementChild;
+            if (lastEntry && !isLastEntryValid(lastEntry, section.fields)) {
+                alert("Veuillez remplir correctement tous les champs avant d'ajouter une nouvelle entrée.");
+                return;
+            }
+
+            const newEntry = document.createElement('div');
+            newEntry.className = 'mb-4';
+            newEntry.innerHTML = generateNewEntryHTML(section.fields);
+            const removeButton = newEntry.querySelector('.remove-btn');
+
+            removeButton.addEventListener('click', function () {
+                container.removeChild(newEntry);
+            });
+
+            container.appendChild(newEntry);
+        });
+    });
+
+    function isLastEntryValid(entry, fields) {
+        return fields.every(field => {
+            const input = entry.querySelector(`[data-validation-type="${field}"]`);
+            if (!input) return false;
+
+            const value = (input.type === 'date') ? input.value : input.value.trim();
+            return validationRules[field](value);
+        });
+    }
+
+    function generateNewEntryHTML(fields) {
+        return `
+            <div class="grid sm:grid-cols-1 md:grid-cols-${fields.length < 3 ? 2 : 3} gap-4 mb-2">
+                ${fields.map(field => `
+                    <div>
+                        <label class="text-gray-700 font-medium">${getFieldLabel(field)}</label>
+                        ${getInputField(field)}
+                        <div class="validation-message"></div>
+                    </div>
+                `).join('')}
             </div>
             <div class="flex justify-end pt-4">
-                <button class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-lg transition-colors duration-200">
+                <button class="remove-btn bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-lg transition-colors duration-200">
                     -
                 </button>
             </div>
         `;
+    }
 
-        const removeButton = newAchievement.querySelector('button');
-        removeButton.addEventListener('click', function() {
-            achievementsContainer.removeChild(newAchievement);
-        });
-
-        achievementsContainer.appendChild(newAchievement);
-    });
-});
-
-
-// add experience sections
-
-document.addEventListener('DOMContentLoaded', function() {
-    const addExperienceButton = document.getElementById('add-experience');
-    const experienceContainer = document.getElementById('experience-container');
-
-    addExperienceButton.addEventListener('click', function() {
-        const newExperience = document.createElement('div');
-        newExperience.className = 'mb-4';
-        newExperience.innerHTML = `
-            <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-4 mb-2">
-                <div>
-                            <label class="text-gray-700 font-medium">Title</label>
-                            <input type="text"
-                                class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition-all duration-200"
-                                placeholder="e.g. Software Engineer">
-                        </div>
-
-                        <!-- Company/Organization -->
-                        <div>
-                            <label class="text-gray-700 font-medium">Company/Organization</label>
-                            <input type="text"
-                                class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition-all duration-200"
-                                placeholder="e.g. Tech Innovations Inc.">
-                        </div>
-
-                        <!-- Location -->
-                        <div>
-                            <label class="text-gray-700 font-medium">Location</label>
-                            <input type="text"
-                                class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition-all duration-200"
-                                placeholder="e.g. New York, NY">
-                        </div>
-
-                        <!-- Start Date -->
-                        <div>
-                            <label class="text-gray-700 font-medium">Start Date</label>
-                            <input type="date"
-                                class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition-all duration-200">
-                        </div>
-
-                        <!-- End Date -->
-                        <div>
-                            <label class="text-gray-700 font-medium">End Date</label>
-                            <input type="date"
-                                class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition-all duration-200">
-                        </div>
-
-                        <!-- Description -->
-                        <div>
-                            <label class="text-gray-700 font-medium">Description</label>
-                            <textarea rows="3"
-                                class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition-all duration-200"
-                                placeholder="e.g. Developed and maintained web applications..."></textarea>
-                        </div>
-            </div>
-            <div class="flex justify-end pt-4">
-                <button class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-lg transition-colors duration-200">
-                    -
-                </button>
-            </div>
-        `;
-
-        const removeButton = newExperience.querySelector('button');
-        removeButton.addEventListener('click', function() {
-            experienceContainer.removeChild(newExperience);
-        });
-
-        // Modification cruciale ici : utiliser appendChild au lieu de insertBefore
-        experienceContainer.appendChild(newExperience);
-    });
-});
-
-
-// add education sections
-
-document.addEventListener('DOMContentLoaded', function() {
-    const addEducationButton = document.getElementById('add-education');
-    const educationContainer = document.getElementById('education-container');
-
-    addEducationButton.addEventListener('click', function() {
-        const newEducation = document.createElement('div');
-        newEducation.className = 'mb-4';
-        newEducation.innerHTML = `
-            <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-4 mb-2">
-                 <!-- School -->
-                        <div>
-                            <label class="text-gray-700 font-medium">School</label>
-                            <input type="text"
-                                class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition-all duration-200"
-                                placeholder="e.g. Software Engineer">
-                        </div>
-
-                        <!-- Degree -->
-                        <div>
-                            <label class="text-gray-700 font-medium">Degree</label>
-                            <input type="text"
-                                class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition-all duration-200"
-                                placeholder="e.g. Tech Innovations Inc.">
-                        </div>
-
-                        <!-- City -->
-                        <div>
-                            <label class="text-gray-700 font-medium">City</label>
-                            <input type="text"
-                                class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition-all duration-200"
-                                placeholder="e.g. New York, NY">
-                        </div>
-
-                        <!-- Start Date -->
-                        <div>
-                            <label class="text-gray-700 font-medium">Start Date</label>
-                            <input type="date"
-                                class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition-all duration-200">
-                        </div>
-
-                        <!-- End Date -->
-                        <div>
-                            <label class="text-gray-700 font-medium">End Date</label>
-                            <input type="date"
-                                class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition-all duration-200">
-                        </div>
-
-                        <!-- Description -->
-                        <div>
-                            <label class="text-gray-700 font-medium">Description</label>
-                            <textarea rows="3"
-                                class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition-all duration-200"
-                                placeholder="e.g. Developed and maintained web applications..."></textarea>
-                        </div>
-            </div>
-            <div class="flex justify-end pt-4">
-                <button class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-lg transition-colors duration-200">
-                    -
-                </button>
-            </div>
-        `;
-
-        const removeButton = newEducation.querySelector('button');
-        removeButton.addEventListener('click', function() {
-            educationContainer.removeChild(newEducation);
-        });
-
-        educationContainer.appendChild(newEducation);
-    });
-});
-
-
-// add project sections
-
-document.addEventListener('DOMContentLoaded', function() {
-    const addProjectButton = document.getElementById('add-project');
-    const projectsContainer = document.getElementById('projects-container');
-
-    addProjectButton.addEventListener('click', function() {
-        const newProject = document.createElement('div');
-        newProject.className = 'mb-4';
-        newProject.innerHTML = `
-            <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-4 mb-2">
-                <div>
-                    <label class="text-gray-700 font-medium">Project Name</label>
-                    <input type="text"
-                        class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition-all duration-200">
-                </div>
-                <div>
-                    <label class="text-gray-700 font-medium">Project Link</label>
-                    <input type="text"
-                        class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition-all duration-200">
-                </div>
-                <div>
-                    <label class="text-gray-700 font-medium">Description</label>
-                    <textarea rows="3"
-                        class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition-all duration-200"></textarea>
-                </div>
-            </div>
-            <div class="flex justify-end pt-4">
-                <button class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-lg transition-colors duration-200">
-                    -
-                </button>
-            </div>
-        `;
-
-        const removeButton = newProject.querySelector('button');
-        removeButton.addEventListener('click', function() {
-            projectsContainer.removeChild(newProject);
-        });
-
-        projectsContainer.appendChild(newProject);
-    });
-});
-
-// add skill sections
-
-document.addEventListener('DOMContentLoaded', function() {
-    const addSkillButton = document.getElementById('add-skill');
-    const skillsContainer = document.getElementById('skills-container');
-
-    addSkillButton.addEventListener('click', function() {
-        const newSkill = document.createElement('div');
-        newSkill.className = 'mb-4';
-        newSkill.innerHTML = `
-            <div class="relative">
-                <input type="text"
+    function getInputField(field) {
+        if (field.includes("Desc")) {
+            return `<textarea data-validation-type="${field}" rows="3"
                     class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition-all duration-200"
-                    placeholder="e.g. JavaScript, Python, React">
-                <div class="flex justify-end pt-4">
-                    <button class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-lg transition-colors duration-200">
-                        -
-                    </button>
-                </div>
-            </div>
-        `;
+                    placeholder="Saisissez votre description ici..."></textarea>`;
+        } else if (field.includes("Date")) {
+            return `<input type="date" data-validation-type="${field}" 
+                    class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition-all duration-200">`;
+        } else {
+            return `<input type="text" data-validation-type="${field}" 
+                    class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition-all duration-200"
+                    placeholder="Saisissez ici...">`;
+        }
+    }
 
-        const removeButton = newSkill.querySelector('button');
-        removeButton.addEventListener('click', function() {
-            skillsContainer.removeChild(newSkill);
-        });
-
-        skillsContainer.appendChild(newSkill);
-    });
+    function getFieldLabel(field) {
+        const labels = {
+            achievementTitle: "Title",
+            achievementDesc: "Description",
+            experienceTitle: "Title",
+            company: "Company/Organization",
+            location: "Location",
+            startDate: "Start Date",
+            endDate: "End Date",
+            experienceDesc: "Description",
+            school: "School",
+            degree: "Degree",
+            city: "City",
+            eduStartDate: "Start Date",
+            eduEndDate: "End Date",
+            eduDesc: "Description",
+            projectName: "Project Name",
+            projectLink: "Project Link",
+            projectDesc: "Description",
+            skill: "Skill"
+        };
+        return labels[field] || "Field";
+    }
 });
+
 
 
 // Configuration des règles de validation pour toutes les sections
