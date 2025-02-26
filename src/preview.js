@@ -283,7 +283,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-// Configuration des règles de validation
+// Configuration des règles de validation pour toutes les sections
 const validationRules = {
     firstname: value => value.trim().length >= 2,
     lastname: value => value.trim().length >= 2,
@@ -292,6 +292,36 @@ const validationRules = {
     summary: value => value.trim().length >= 10,
     email: value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
     phoneno: value => /^\+?[\d\s-]{8,}$/.test(value),
+    
+    // Achievements
+    achievementTitle: value => value.trim().length >= 3,
+    achievementDesc: value => value.trim().length >= 5,
+
+    // Experience
+    experienceTitle: value => value.trim().length >= 3,
+    company: value => value.trim().length >= 3,
+    location: value => value.trim().length >= 3,
+    startDate: value => value !== "",
+    endDate: value => value !== "",
+    experienceDesc: value => value.trim().length >= 10,
+
+    // Education
+    school: value => value.trim().length >= 3,
+    degree: value => value.trim().length >= 3,
+    city: value => value.trim().length >= 3,
+    eduStartDate: value => value !== "",
+    eduEndDate: value => value !== "",
+    eduDesc: value => value.trim().length >= 10,
+
+    // Projects
+    projectName: value => value.trim().length >= 3,
+    projectLink: value => /^https?:\/\/.+$/.test(value),
+    projectDesc: value => value.trim().length >= 10,
+
+    // Skills
+    skill: value => value.trim().length >= 2,
+
+    // Image validation
     image: file => !file || (['image/jpeg', 'image/png'].includes(file.type) && file.size <= 2097152)
 };
 
@@ -304,10 +334,33 @@ const errorMessages = {
     summary: 'Minimum 10 caractères requis',
     email: 'Format email invalide',
     phoneno: 'Format téléphone invalide',
-    image: 'Image >2MB ou format non supporté'
+    image: 'Image >2MB ou format non supporté',
+
+    achievementTitle: 'Titre trop court',
+    achievementDesc: 'Description trop courte',
+
+    experienceTitle: 'Titre trop court',
+    company: 'Nom de l\'entreprise trop court',
+    location: 'Lieu trop court',
+    startDate: 'Veuillez sélectionner une date de début',
+    endDate: 'Veuillez sélectionner une date de fin',
+    experienceDesc: 'Description trop courte',
+
+    school: 'Nom de l\'école trop court',
+    degree: 'Nom du diplôme trop court',
+    city: 'Nom de la ville trop court',
+    eduStartDate: 'Veuillez sélectionner une date de début',
+    eduEndDate: 'Veuillez sélectionner une date de fin',
+    eduDesc: 'Description trop courte',
+
+    projectName: 'Nom du projet trop court',
+    projectLink: 'Lien du projet invalide (doit être une URL valide)',
+    projectDesc: 'Description trop courte',
+
+    skill: 'Compétence trop courte'
 };
 
-// Fonction de debounce
+// Fonction de debounce pour limiter les vérifications
 const debounce = (func, wait = 500) => {
     let timeout;
     return (...args) => {
@@ -316,10 +369,13 @@ const debounce = (func, wait = 500) => {
     };
 };
 
-// Gestionnaire de validation générique
+// Fonction de validation générique
 const createValidator = (id) => {
     const input = document.getElementById(id);
+    if (!input) return; // Évite les erreurs si l'élément n'existe pas
+
     const msgElement = document.getElementById(`${id}-msg`);
+    if (!msgElement) return; // Évite les erreurs si le message d'erreur n'existe pas
 
     const validate = debounce(() => {
         const value = input.type === 'file' ? input.files[0] : input.value;
@@ -332,16 +388,34 @@ const createValidator = (id) => {
     input.addEventListener(input.type === 'file' ? 'change' : 'input', validate);
 };
 
-// Initialisation
+// Initialisation de la validation sur tous les champs définis
 document.addEventListener('DOMContentLoaded', () => {
     Object.keys(validationRules).forEach(createValidator);
     
-    // Prévisualisation image
-    document.getElementById('image').addEventListener('change', function(e) {
-        const preview = document.getElementById('preview');
-        const file = e.target.files[0];
-        if (file && validationRules.image(file)) {
-            preview.src = URL.createObjectURL(file);
-        }
-    });
+    // Prévisualisation de l'image dans la section "À propos"
+    const imageInput = document.getElementById('image');
+    if (imageInput) {
+        imageInput.addEventListener('change', function(e) {
+            const preview = document.getElementById('preview');
+            const file = e.target.files[0];
+            if (file && validationRules.image(file)) {
+                preview.src = URL.createObjectURL(file);
+            }
+        });
+    }
 });
+
+// Validation dynamique pour les entrées ajoutées (achievements, experience, education, projects, skills)
+document.addEventListener('input', debounce((e) => {
+    if (!e.target.matches('input[data-validation-type], textarea[data-validation-type]')) return;
+
+    const input = e.target;
+    const validationType = input.dataset.validationType;
+    const msgElement = input.nextElementSibling;
+    const value = input.value.trim();
+
+    const isValid = validationRules[validationType](value);
+
+    msgElement.textContent = isValid ? '✓ Valide' : errorMessages[validationType];
+    msgElement.className = `validation-message ${isValid ? 'valid' : 'invalid'}`;
+}));
