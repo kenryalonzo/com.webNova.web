@@ -281,3 +281,67 @@ document.addEventListener('DOMContentLoaded', function() {
         skillsContainer.appendChild(newSkill);
     });
 });
+
+
+// Configuration des règles de validation
+const validationRules = {
+    firstname: value => value.trim().length >= 2,
+    lastname: value => value.trim().length >= 2,
+    designation: value => value.trim().length >= 5,
+    address: value => value.trim().length >= 5,
+    summary: value => value.trim().length >= 10,
+    email: value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+    phoneno: value => /^\+?[\d\s-]{8,}$/.test(value),
+    image: file => !file || (['image/jpeg', 'image/png'].includes(file.type) && file.size <= 2097152)
+};
+
+// Messages d'erreur
+const errorMessages = {
+    firstname: 'Minimum 2 caractères requis',
+    lastname: 'Minimum 2 caractères requis',
+    designation: 'Minimum 5 caractères requis',
+    address: 'Adresse trop courte',
+    summary: 'Minimum 10 caractères requis',
+    email: 'Format email invalide',
+    phoneno: 'Format téléphone invalide',
+    image: 'Image >2MB ou format non supporté'
+};
+
+// Fonction de debounce
+const debounce = (func, wait = 500) => {
+    let timeout;
+    return (...args) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func(...args), wait);
+    };
+};
+
+// Gestionnaire de validation générique
+const createValidator = (id) => {
+    const input = document.getElementById(id);
+    const msgElement = document.getElementById(`${id}-msg`);
+
+    const validate = debounce(() => {
+        const value = input.type === 'file' ? input.files[0] : input.value;
+        const isValid = validationRules[id](value);
+        
+        msgElement.textContent = isValid ? '✓ Valide' : errorMessages[id];
+        msgElement.className = `validation-message ${isValid ? 'valid' : 'invalid'}`;
+    });
+
+    input.addEventListener(input.type === 'file' ? 'change' : 'input', validate);
+};
+
+// Initialisation
+document.addEventListener('DOMContentLoaded', () => {
+    Object.keys(validationRules).forEach(createValidator);
+    
+    // Prévisualisation image
+    document.getElementById('image').addEventListener('change', function(e) {
+        const preview = document.getElementById('preview');
+        const file = e.target.files[0];
+        if (file && validationRules.image(file)) {
+            preview.src = URL.createObjectURL(file);
+        }
+    });
+});

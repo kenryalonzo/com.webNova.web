@@ -18,101 +18,134 @@
 
 <body class="bg-[#FFFAF2]">
 
+    <!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Utilisateur</title>
+    <style>
+        .validation-message {
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+            padding-left: 0.25rem;
+            height: 1rem;
+        }
+        .valid { color: #22c55e; }
+        .invalid { color: #ef4444; }
+    </style>
+</head>
+<body>
     <section id="about-sc" class="bg-gray-50 py-8">
         <div class="container mx-auto px-4">
             <form class="bg-white rounded-lg shadow-lg overflow-y-hidden">
-                <!-- Maintenant passons a l'entete -->
+                <!-- En-tête -->
                 <div class="bg-gray-800 py-4 px-4">
                     <h3 class="text-white font-semibold text-lg tracking-wide">À propos</h3>
                 </div>
 
                 <div class="p-6 space-y-8">
 
-                    <!-- section Identite user -->
+                    <!-- Section Identité -->
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                         <!-- Colonne Image -->
                         <div class="flex flex-col items-center space-y-4">
-                            <div
-                                class="relative w-32 h-32 rounded-full bg-gray-100 border-2 border-dashed border-indigo-100 overflow-hidden group">
-                                <img id="preview" class="w-full h-full object-cover"
-                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
-                                    alt="Preview">
-                                <div
-                                    class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <div class="relative w-32 h-32 rounded-full bg-gray-100 border-2 border-dashed border-indigo-100 overflow-hidden group">
+                                <img id="preview" class="w-full h-full object-cover" 
+                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" 
+                                     alt="Preview">
+                                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                     <span class="text-white text-xs text-center px-2">Cliquez pour modifier</span>
                                 </div>
-                                <input type="file" name="image" id="image"
-                                    class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*"
-                                    onchange="previewImage(event)">
+                                <input type="file" name="image" id="image" 
+                                       class="absolute inset-0 opacity-0 cursor-pointer" 
+                                       accept="image/*">
                             </div>
                             <div class="text-center">
                                 <p class="text-xs text-gray-500">Formats supportés : JPG, PNG</p>
+                                <div id="image-msg" class="validation-message"></div>
                             </div>
                         </div>
 
                         <!-- Colonnes Informations -->
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 col-span-3">
+                            <!-- Prénom -->
                             <div>
-                                <label for="firstname"
-                                    class="block text-sm font-medium text-gray-700 mb-1.5">Prénom</label>
-                                <input type="text" id="firstname"
-                                    class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition-all"
-                                    placeholder="Jean">
+                                <label for="firstname" class="block text-sm font-medium text-gray-700 mb-1.5">Prénom</label>
+                                <input type="text" id="firstname" 
+                                       class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition-all" 
+                                       placeholder="Jean">
+                                <div id="firstname-msg" class="validation-message"></div>
                             </div>
+
+                            <!-- Deuxième prénom -->
                             <div>
-                                <label for="middlename" class="block text-sm font-medium text-gray-700 mb-1.5">Deuxième
-                                    prénom</label>
-                                <input type="text" id="middlename"
-                                    class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400"
-                                    placeholder="Paul (facultatif)">
+                                <label for="middlename" class="block text-sm font-medium text-gray-700 mb-1.5">Deuxième prénom</label>
+                                <input type="text" id="middlename" 
+                                       class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400" 
+                                       placeholder="Paul (facultatif)">
+                                <div id="middlename-msg" class="validation-message"></div>
                             </div>
+
+                            <!-- Nom de famille -->
                             <div>
-                                <label for="lastname" class="block text-sm font-medium text-gray-700 mb-1.5">Nom de
-                                    famille</label>
-                                <input type="text" id="lastname"
-                                    class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400"
-                                    placeholder="Dupont">
+                                <label for="lastname" class="block text-sm font-medium text-gray-700 mb-1.5">Nom de famille</label>
+                                <input type="text" id="lastname" 
+                                       class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400" 
+                                       placeholder="Dupont">
+                                <div id="lastname-msg" class="validation-message"></div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Section Profession -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Poste -->
                         <div>
-                            <label for="designation"
-                                class="block text-sm font-medium text-gray-700 mb-1.5">Poste</label>
-                            <input type="text" id="designation"
-                                class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400"
-                                placeholder="Chef de projet digital">
+                            <label for="designation" class="block text-sm font-medium text-gray-700 mb-1.5">Poste</label>
+                            <input type="text" id="designation" 
+                                   class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400" 
+                                   placeholder="Chef de projet digital">
+                            <div id="designation-msg" class="validation-message"></div>
                         </div>
+
+                        <!-- Adresse -->
                         <div>
                             <label for="address" class="block text-sm font-medium text-gray-700 mb-1.5">Adresse</label>
-                            <input type="text" id="address"
-                                class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400"
-                                placeholder="12 Rue de la Liberté">
+                            <input type="text" id="address" 
+                                   class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400" 
+                                   placeholder="12 Rue de la Liberté">
+                            <div id="address-msg" class="validation-message"></div>
                         </div>
+
+                        <!-- Résumé -->
                         <div>
                             <label for="summary" class="block text-sm font-medium text-gray-700 mb-1.5">Résumé</label>
-                            <input type="text" id="summary"
-                                class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400"
-                                placeholder="Spécialiste en gestion de projet">
+                            <input type="text" id="summary" 
+                                   class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400" 
+                                   placeholder="Spécialiste en gestion de projet">
+                            <div id="summary-msg" class="validation-message"></div>
                         </div>
                     </div>
 
                     <!-- Section Contact -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Email -->
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-1.5">Email</label>
-                            <input type="email" id="email"
-                                class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400"
-                                placeholder="contact@exemple.com">
+                            <input type="email" id="email" 
+                                   class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400" 
+                                   placeholder="contact@exemple.com">
+                            <div id="email-msg" class="validation-message"></div>
                         </div>
+
+                        <!-- Téléphone -->
                         <div>
-                            <label for="phoneno"
-                                class="block text-sm font-medium text-gray-700 mb-1.5">Téléphone</label>
-                            <input type="tel" id="phoneno"
-                                class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400"
-                                placeholder="+237 6 51 28 12 29">
+                            <label for="phoneno" class="block text-sm font-medium text-gray-700 mb-1.5">Téléphone</label>
+                            <input type="tel" id="phoneno" 
+                                   class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400" 
+                                   placeholder="+237 6 51 28 12 29">
+                            <div id="phoneno-msg" class="validation-message"></div>
                         </div>
                     </div>
                 </div>
