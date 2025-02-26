@@ -38,3 +38,15 @@ button {
     75% { transform: translateX(5px); }
 }
 
+/* validation */
+
+.validation-message {
+    transition: opacity 0.3s ease;
+    font-size: 0.75rem;
+}
+.valid { 
+    color: #16a34a; 
+}
+.invalid {
+    color: #dc2626; 
+}
