@@ -1,1 +1,386 @@
 @import "tailwindcss";
+
+
+ /* Basic Reset */
+ body, h1, p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+}
+
+/* Header Styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: white;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Logo Styles */
+.logo img {
+    width: 120px;  /* Adjust the size of the logo */
+    height: auto;
+}
+
+/* Hamburger Button Styles */
+.hamburger {
+    display: none;  /* Initially hide the hamburger on larger screens */
+    width: 30px;
+    height: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    border: 2px solid #A78E7D;
+   
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.hamburger div {
+    width: 100%;
+    height: 4px;
+    background-color: #A78E7D;
+    border-color: #A78E7D;
+}
+
+/* Mobile Menu (hidden by default) */
+.mobile-menu {
+    display: none;
+    background-color: #f4f4f4;
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    width: 200px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.mobile-menu.open {
+    display: block;
+}
+
+.mobile-menu a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.mobile-menu a:hover {
+    background-color: #ddd;
+}
+
+/* Show hamburger button on mobile */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+}
+
+ /* Define a common class for the carousel items */
+.carousel-item {
+width: 100%;
+height: 100px;
+object-fit: cover;
+}
+
+/* Make the carousel's container overflow hidden */
+.carousel-container {
+overflow: hidden;
+}
+
+/* Adjust scrolling animation timing for both carousels */
+@keyframes scrollUp {
+0% {
+transform: translateY(100%);
+}
+100% {
+transform: translateY(-100%);
+}
+}
+
+@keyframes scrollDown {
+0% {
+transform: translateY(-100%);
+}
+100% {
+transform: translateY(100%);
+}
+}
+
+.carousel-up {
+animation: scrollUp 20s linear infinite;
+}
+
+.carousel-down {
+animation: scrollDown 20s linear infinite;
+}
+
+/* Ensure both carousels' containers are aligned and displayed at the same time */
+.carousel-wrapper {
+display: flex;
+justify-content: space-around;
+align-items: center;
+gap: 0.5rem; /* Reduced space between carousels */
+}
+
+
+
+
+.section-style {
+    background-color: #A78E7D;
+    padding: 20px;
+    text-align: center;
+    color: #FFFAF2;
+}
+
+.title {
+    color: #FFFAF2;
+}
+
+.description {
+    color: #FFFAF2;
+    margin-bottom: 30px;
+}
+
+
+
+.cards-container {
+    display: flex;
+    justify-content: center; /* Centre les cartes horizontalement */
+    gap: 30px;
+    margin-bottom: 30px;
+    flex-wrap: wrap; /* Permet aux cartes de se réorganiser sur plusieurs lignes si nécessaire */
+    justify-content: center; /* S'assure que les cartes restent centrées même sur de grandes largeurs */
+}
+
+.card1, .card2, .card3 {
+    background-color: #FFFAF2;
+    width: 300px;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds the shadow */
+    transition: box-shadow 0.3s ease; /* Adds a smooth transition when hovering */
+}
+
+.card1:hover, .card2:hover, .card3:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Shadow on hover, increases the shadow for a more dramatic effect */
+}
+
+.card1:hover {
+    background-color: #95DCCF;
+    
+}
+
+.card2:hover:hover {
+    background-color: #A0EBFA;
+    
+}
+
+.card3:hover:hover {
+    background-color: #F8C5FF;
+    
+}
+
+.card-image {
+    width: 20%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px; /* Optional: adds space between the image and the text */
+    display: block; /* Makes the image a block element */
+    margin-left: auto; /* Centers the image horizontally */
+    margin-right: auto; /* Centers the image horizontally */
+}
+
+.card-title {
+    color: black;
+    margin-top: 10px;
+}
+
+.card-description {
+    color: black;
+    margin-top: 10px;
+}
+
+.button-container {
+    text-align: center; /* Centers the button horizontally */
+    margin-top: 30px; /* Adds some space above the button */
+}
+
+.create-cv-button {
+    background-color: #FFFAF2;
+    color: #A78E7D;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.create-cv-button:hover {
+    background-color: #FDC3D2;
+    color: black;
+}
+
+
+.cv-models-section {
+    background-color: white; /* Fond blanc */
+    padding: 40px 20px; /* Ajoute de l'espace autour du contenu */
+    text-align: center; /* Centre le texte */
+    min-height: 700px; /* Augmente la hauteur de la section */
+}
+
+.section-title {
+    color: black; /* Titre en noir */
+    font-size: 2rem; /* Taille du titre */
+    font-weight: bold; /* Rend le titre gras */
+    margin-bottom: 30px; /* Espace entre le titre et les images */
+}
+
+.images-container {
+    display: flex;
+    justify-content: center; /* Centre les images horizontalement */
+    gap: 40px; /* Espace entre les images */
+}
+
+.cv-image {
+    width: 400px; /* Augmente la largeur des images */
+    height: 600px; /* Augmente la hauteur des images */
+    object-fit: cover; /* Maintient les proportions de l'image et couvre l'espace disponible */
+    border-radius: 8px; /* Arrondit les coins des images */
+    margin-top: 20px;
+}
+
+.cv-image:hover {
+    filter: brightness(60%); /* Rend l'image plus sombre lors du survol */
+}
+
+
+/* Ajoute ce style dans un fichier CSS externe ou dans un bloc style dans ton HTML */
+/* Add this style in your external CSS file or in a <style> block */
+
+.faq-section {
+    background-color: white;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.faq-item {
+    margin-bottom: 16px;
+}
+
+.faq-question {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.faq-answer {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-top: 0;
+    border-radius: 8px;
+}
+
+
+
+.arrow1-icon1.rotate {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease-in-out;
+}
+
+.faq-answer.hidden {
+    display: none;
+}
+
+.faq-answer.show {
+    display: block;
+} 
+    
+
+.button-container1 {
+    text-align: center; /* Centers the button horizontally */
+    margin-top: 30px; /* Adds some space above the button */
+}
+
+.create-cv-button1 {
+    background-color: #FFFAF2;
+    color: #A78E7D;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.create-cv-button1:hover {
+    background-color: #d9cec6;
+    color: #FFFAF2;
+}
+
+
+/* Footer styles */
+.footer {
+    background-color: #2C2C2C;
+    color: white;
+}
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;  /* Align items to the top vertically */
+}
+
+.footer-column h3 {
+    font-size: 1.25rem; /* Title size */
+    margin-bottom: 1.5rem; /* Increased margin between title and content */
+}
+
+.footer-column p {
+    text-align: left;  /* Align text to the left */
+    font-size: 1rem;     /* Set paragraph size */
+    line-height: 1.75rem; /* Add line height for spacing between lines */
+}
+
+.footer-column img {
+    width: 2rem;
+    height: 2rem;
+    object-fit: contain;
+    /* Optional: add more space between icons */
+    margin: 0.25rem;
+}
+
+/* Responsive grid */
+@media (min-width: 640px) {
+    .footer {
+        padding: 2rem 1rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .footer .container {
+        max-width: 1200px;
+    }
+
+    .footer .grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+p {
+    line-height: 1.8; /* 1.8 times the font size */
+}

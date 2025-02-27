@@ -14,219 +14,459 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
     rel="stylesheet">
+  <script src="./src/app.js" defer></script>
 </head>
 
-<body class="font-inter">
 
-  <header class="header">
-    <nav class="bg-white shadow-md py-4">
-      <div class="container mx-auto px-6 flex justify-between items-center">
-        <a href="#" class="flex items-center text-xl font-semibold text-gray-800">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-blue-600" fill="none" viewBox="0 0 24 24"
-            stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-          </svg>
-          Webnova
-        </a>
-        <div class="hidden md:flex space-x-4">
-        </div>
-        <div class="">
-          <button id="menu-toggle" class="text-gray-600 hover:text-blue-600 focus:outline-none focus:text-blue-600">
-            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-        </div>
-      </div>
-      <div id="mobile-menu" class="hidden md:hidden bg-white shadow-md mt-2">
-      </div>
-    </nav>
+<body class="bg-white">
 
-    <section class="bg-gradient-to-r from-blue-100 to-blue-50 py-20">
-      <div class="container mx-auto px-6 text-center">
-        <h1 class="text-4xl font-bold text-gray-800 mb-4">Créez un CV professionnel en quelques minutes</h1>
-        <p class="text-lg text-gray-600 mb-8">Des modèles modernes et personnalisables pour vous démarquer.</p>
-        <a href="#"
-          class="px-8 py-3 bg-blue-600 text-white rounded-full text-lg font-semibold hover:bg-blue-700 transition duration-300">Commencer
-          maintenant</a>
-      </div>
-    </section>
+  <!-- Section de l'en-tête -->
+  <header class="flex justify-between items-center p-5 bg-white border-b border-gray-300">
+    <!-- Logo -->
+    <div class="logo">
+      <img src="./public/assets/img/logo.png" alt="Logo" class="w-32 h-auto">
+    </div>
+
+    <!-- Bouton Hamburger -->
+    <button id="hamburger" class="block  border-2 border-[#A78E7D] p-3 ">
+      <span class="block w-8 h-1 bg-[#A78E7D] mb-1"></span>
+      <span class="block w-8 h-1 bg-[#A78E7D] mb-1"></span>
+      <span class="block w-8 h-1 bg-[#A78E7D]"></span>
+    </button>
   </header>
 
-  <section class="py-20 bg-gray-50">
-    <div class="container mx-auto px-6 text-center">
-      <h2 class="text-3xl font-semibold text-gray-800 mb-6">Comment ça marche</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300">
-          <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
+  <!-- Menu mobile (masqué par défaut) -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="public/preview.html">Créez CV</a>
+    <a href="#">Importez CV</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <!-- Première section -->
+  <div class="bg-[#FFFAF2] py-32 pt-12 px-5 text-center">
+    <h2 class="text-[#A78E7D] text-4xl font-semibold mb-6">Creez un CV professionnel en quelques minutes.</h2>
+    <div class="flex justify-around">
+      <div class="carousel-container1 pl-20 ml-20 gap-2">
+        <p class="text-lg text-[#555] mb-8">Des modèles modernes et personnalisables pour vous demarquer.</p>
+        
+        <a href="public/preview.html">
+          <button class="bg-[#A78E7D] text-[#FFFAF2] mt-12 py-3 px-8 rounded-md text-lg hover:bg-[#8C6B58]">Commencez maintenant</button>
+        </a>
+
+      </div>
+
+      <!-- Carousel Section -->
+      <div class="flex justify-center mt-12 space-x-8">
+
+        <!-- Carousel 1 (scrolling upward) -->
+        <div class="carousel-container w-40 h-40 relative">
+          <div class="carousel-up absolute flex flex-col space-y-2">
+            <img src="./public/assets/img/C1.jpg" alt="Image 1" class="carousel-item size-full">
+            <img src="./public/assets/img/C2.jpg" alt="Image 2" class="carousel-item size-full">
+            <img src="./public/assets/img/C3.jpg" alt="Image 3" class="carousel-item size-full">
+            <img src="./public/assets/img/C4.jpg" alt="Image 4" class="carousel-item size-full">
+            <img src="./public/assets/img/C5.jpg" alt="Image 5" class="carousel-item size-full">
+            <img src="./public/assets/img/C6.png" alt="Image 6" class="carousel-item size-full">
           </div>
-          <h3 class="text-xl font-semibold text-gray-800 mb-2">Choisissez un modèle</h3>
-          <p class="text-gray-600">Parcourez notre sélection de modèles professionnels et choisissez celui qui vous
-            convient.</p>
         </div>
-        <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300">
-          <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15.172a2 2 0 01-2.828 0L4.586 10.414a2 2 0 010-2.828l7.242-7.242z" />
-            </svg>
+
+        <!-- Carousel 2 (scrolling downward) -->
+        <div class="carousel-container w-40 h-40 relative">
+          <div class="carousel-down absolute flex flex-col space-y-2">
+            <img src="./public/assets/img/C6.png" alt="Image 6" class="carousel-item size-full">
+            <img src="./public/assets/img/C5.jpg" alt="Image 5" class="carousel-item size-full">
+            <img src="./public/assets/img/C4.jpg" alt="Image 4" class="carousel-item size-full">
+            <img src="./public/assets/img/C3.jpg" alt="Image 3" class="carousel-item size-full">
+            <img src="./public/assets/img/C2.jpg" alt="Image 2" class="carousel-item size-full">
+            <img src="./public/assets/img/C1.jpg" alt="Image 1" class="carousel-item size-full">
           </div>
-          <h3 class="text-xl font-semibold text-gray-800 mb-2">Personnalisez</h3>
-          <p class="text-gray-600">Ajoutez vos informations, modifiez les couleurs et les polices pour créer un CV
-            unique.</p>
         </div>
-        <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300">
-          <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L4 8m4-4v12" />
-            </svg>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Deuxième section -->
+  <div class="bg-white py-20 px-5">
+    <h2 class="text-black text-4xl font-semibold text-center mb-20">C'est quoi WebNova? Pourquoi l'utiliser?</h2>
+
+    <!-- Grid Container -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-0 items-center ">
+
+      <!-- Texte dans les 2 premières colonnes -->
+      <div class="md:col-span-2 text-md text-black leading-relaxed  ml-20 px-10">
+        <p class="">
+          Imaginez un instant que vous êtes à la recherche de nouvelles opportunités <br>
+          professionnelles. Vous avez un parcours, des compétences, mais vous avez <br>
+          besoin d'un CV qui reflète parfaitement votre potentiel. WebNova est là pour ça. <br>
+          Ce site innovant vous permet de créer et personnaliser votre CV de manière <br>
+          interactive, avec une interface simple et intuitive. Pourquoi utiliser WebNova? <br>
+          Parce qu'il simplifie la création de votre CV, vous faisant gagner du temps <br>
+          tout en vous offrant des outils puissants pour un résultat à la hauteur de vos <br>
+          ambitions.
+        </p>
+      </div>
+
+      <!-- Images dans la 3ème colonne -->
+      <div class=" relative flex  mr-10">
+        <!-- Image 1 (au-dessus) -->
+
+        <a href="" class="image-container w-2/4 h-auto relative ">
+          <img src="./public/assets/img/RP1.PNG" alt="Image 1"
+            class="image-item absolute bottom-2  z-10 border-2 transform transition-all duration-300 ease-in-out hover:border-red-500 hover:scale-190 rounded-lg">
+        </a>
+
+        <!-- Image 2 (en dessous) -->
+        <a href="" class="image-container w-2/4 h-auto relative">
+          <img src="./public/assets/img/RP2.PNG" alt="Image 2"
+            class="image-item absolute bottom-[-70px] right-[55px] z-0 border-2 transform transition-all duration-300 ease-in-out hover:border-red-500 hover:scale-190 rounded-lg">
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- Troisième section -->
+  <div class="bg-[#A78E7D] py-32 pt-20 px-3 pb-10 ">
+
+    <h2 class="text-[#FFFAF2] text-4xl  text-center font-semibold mb-6">Comment créer votre CV avec WebNova?</h2>
+    <p class="text-lg text-[#FFFAF2]  text-center mb-8">Créez votre CV en trois étapes.</p>
+
+    <div class="cards-container">
+      <div class="card1">
+        <a href="#model">
+        <img src="./public/assets/img/CA1.png" alt="Image 7" class="card-image">
+        <h2 class="card-title font-bold  text-center">Choisir un modèle</h2>
+        <p class="card-description">Choisissez un modèle de CV et personnalisez le en fonction de votre personnalité et
+          style.</p>
+        </a>
+      </div>
+
+      <div class="card2">
+        <a href="public/preview.html">
+        <img src="./public/assets/img/CA2.png" alt="Image 8" class="card-image">
+        <h2 class="card-title font-bold  text-center">Entrez vos données</h2>
+        <p class="card-description">Saisissez vos informations qui constituent le contenu de votre <br> CV. </p>
+        </a>
+      </div>
+
+      <div class="card3">
+        <a href="public/preview.html">
+        <img src="./public/assets/img/CA3.png" alt="Image 9" class="card-image">
+        <h2 class="card-title font-bold  text-center">Télécharger</h2>
+        <p class="card-description">Enregistrez votre CV,<br> téléchargez-le immediatement <br> et modifiez-le à tout
+          moment.</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="button-container pt-10 pb-10">
+      <a href="public/preview.html">
+      <button class="create-cv-button">Creer CV</button>
+      </a>
+    </div>
+  </div>
+
+  <!-- Quatrième section -->
+  <section id="model" class="cv-models-section py-20 px-5">
+    <h2 class="section-title text-center text-3xl font-semibold mb-10">Modèles de CV</h2>
+
+    <!-- Images container -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-10 justify-center">
+      <img src="./public/assets/img/COL1.png" alt="Modèle 1" class="cv-image w-full h-auto rounded-lg shadow-lg">
+      <img src="./public/assets/img/COL2.png" alt="Modèle 2" class="cv-image w-full h-auto rounded-lg shadow-lg">
+    </div>
+  </section>
+
+
+  <!-- Cinquième section -->
+  <section class="bg-[#FFFAF2] py-12">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <!-- Title -->
+      <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#A78E7D] mb-8">Ce que disent nos clients
+      </h2>
+
+      <!-- Carousel Container -->
+      <div class="relative w-full overflow-hidden">
+        <!-- Carousel Images -->
+        <div id="carouselImages" class="flex transition-transform duration-500 ease-in-out">
+          <!-- Image 1 -->
+          <div class="w-full flex-shrink-0 flex flex-col justify-center items-center">
+            <img src="./public/assets/img/CAR1.png" alt="Image 1"
+              class="w-1/2 sm:w-1/3 lg:w-1/3 xl:w-1/3 h-auto rounded-lg object-cover">
           </div>
-          <h3 class="text-xl font-semibold text-gray-800 mb-2">Téléchargez</h3>
-          <p class="text-gray-600">Téléchargez votre CV au format PDF et partagez-le facilement avec les employeurs.</p>
+
+          <!-- Image 2 -->
+          <div class="w-full flex-shrink-0 flex flex-col justify-center items-center">
+            <img src="./public/assets/img/CAR2.png" alt="Image 2"
+              class="w-1/2 sm:w-1/3 lg:w-1/3 xl:w-1/3 h-auto rounded-lg object-cover">
+          </div>
+
+          <!-- Image 3 -->
+          <div class="w-full flex-shrink-0 flex flex-col justify-center items-center">
+            <img src="./public/assets/img/CAR3.png" alt="Image 3"
+              class="w-1/2 sm:w-1/3 lg:w-1/3 xl:w-1/3 h-auto rounded-lg object-cover">
+          </div>
+
+          <!-- Image 4 -->
+          <div class="w-full flex-shrink-0 flex flex-col justify-center items-center">
+            <img src="./public/assets/img/CAR1.png" alt="Image 4"
+              class="w-1/2 sm:w-1/3 lg:w-1/3 xl:w-1/3 h-auto rounded-lg object-cover">
+          </div>
+
+          <!-- Image 5 -->
+          <div class="w-full flex-shrink-0 flex flex-col justify-center items-center">
+            <img src="./public/assets/img/CAR2.png" alt="Image 5"
+              class="w-1/2 sm:w-1/3 lg:w-1/3 xl:w-1/3 h-auto rounded-lg object-cover">
+          </div>
         </div>
+
+        <!-- Carousel Navigation (Prev/Next) -->
+        <button id="prevBtn"
+          class="absolute left-0 sm:left-40 top-1/2 sm:top-1/3 transform -translate-y-1/2 px-4 py-2 text-[#FFFAF2] bg-[#A78E7D] rounded-full">
+          &#10094;
+        </button>
+        <button id="nextBtn"
+          class="absolute right-0 sm:right-40 top-1/2 sm:top-1/3 transform -translate-y-1/2 px-4 py-2 text-[#FFFAF2] bg-[#A78E7D] rounded-full">
+          &#10095;
+        </button>
       </div>
     </div>
   </section>
 
-  <section class="py-20 bg-white">
-    <div class="container mx-auto px-6 text-center">
-      <h2 class="text-3xl font-semibold text-gray-800 mb-12">Modèles Populaires</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+  <!-- Sixième section -->
+  <div id="faq" faq-section bg-white py-10 px-5>
+    <h2 class="text-black text-3xl font-semibold text-center mb-8">Foire Aux Questions</h2>
+
+    <div class="faq-container">
+      <!-- Question 1 -->
+      <div class="faq-item mb-4 max-w-3xl mx-auto">
         <div
-          class="group relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-500 transform hover:-translate-y-2">
-          <img src="./public/assets/images/Basic.jpg" alt="Modèle Classique"
-            class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105">
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
-            <h3 class="text-xl font-semibold text-white mb-2">Modèle Classique</h3>
-            <p class="text-gray-300 mb-4">Un modèle élégant et professionnel pour toutes les occasions.</p>
-            <a href="#"
-              class="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors duration-300">Voir
-              le modèle</a>
-          </div>
+          class="faq-question flex justify-between items-center p-4 border border-gray-300 rounded-lg cursor-pointer">
+          <p class="text-black text-lg">Qu'est ce qu'un CV?</p>
+          <svg class="arrow-icon w-6 h-6 text-gray-600 transform transition-transform duration-300"
+            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clip-rule="evenodd" />
+          </svg>
         </div>
+        <div class="faq-answer p-4 hidden">
+          <p>Un CV (Curriculum Vitae) est un document qui présente le parcours professionnel, académique, ainsi que les
+            compétences et expériences d'une personne. Il sert généralement à postuler à des emplois, des stages, ou
+            d'autres opportunités professionnelles. Un CV bien rédigé permet de mettre en avant les qualifications du
+            candidat de manière claire et structurée.</p>
+        </div>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="faq-item mb-4 max-w-3xl mx-auto">
         <div
-          class="group relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-500 transform hover:-translate-y-2">
-          <img src="./public/assets/images/College.jpg" alt="Modèle Moderne"
-            class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105">
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
-            <h3 class="text-xl font-semibold text-white mb-2">Modèle Moderne</h3>
-            <p class="text-gray-300 mb-4">Un design contemporain pour les esprits créatifs.</p>
-            <a href="#"
-              class="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors duration-300">Voir
-              le modèle</a>
+          class="faq-question flex justify-between items-center p-4 border border-gray-300 rounded-lg cursor-pointer">
+          <p class="text-black text-lg">Que contient un CV?</p>
+          <svg class="arrow-icon w-6 h-6 text-gray-600 transform transition-transform duration-300"
+            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="faq-answer p-4 hidden">
+          <p>Un CV contient généralement les informations personnelles, l'expérience professionnelle, la formation, les
+            compétences et les centres d'intérêt. Il peut aussi inclure des certifications et des références.</p>
+        </div>
+      </div>
+
+      <!-- Question 3 -->
+      <div class="faq-item mb-4 max-w-3xl mx-auto">
+        <div
+          class="faq-question flex justify-between items-center p-4 border border-gray-300 rounded-lg cursor-pointer">
+          <p class="text-black text-lg">Comment faire un CV?</p>
+          <svg class="arrow-icon w-6 h-6 text-gray-600 transform transition-transform duration-300"
+            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="faq-answer p-4 hidden">
+          <p>Pour faire un CV, indiquez vos informations personnelles, puis listez votre expérience professionnelle,
+            formation, compétences et centres d'intérêt de manière concise. Adaptez-le au poste visé en étant clair et
+            structuré</p>
+        </div>
+      </div>
+
+      <!-- Question 4 -->
+      <div class="faq-item mb-4 max-w-3xl mx-auto">
+        <div
+          class="faq-question flex justify-between items-center p-4 border border-gray-300 rounded-lg cursor-pointer">
+          <p class="text-black text-lg">Conseils pour la rédaction d'un CV</p>
+          <svg class="arrow-icon w-6 h-6 text-gray-600 transform transition-transform duration-300"
+            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="faq-answer p-4 hidden">
+          <p>Soyez clair, concis et structuré, en mettant en avant les expériences et compétences les plus pertinentes
+            pour le poste. Adaptez votre CV à chaque offre et relisez-le pour éviter les erreurs</p>
+        </div>
+      </div>
+
+      <!-- Question 5 -->
+      <div class="faq-item mb-4 max-w-3xl mx-auto">
+        <div
+          class="faq-question flex justify-between items-center p-4 border border-gray-300 rounded-lg cursor-pointer">
+          <p class="text-black text-lg">Quelles sont les avantages d'utiliser le site WebNova?</p>
+          <svg class="arrow-icon w-6 h-6 text-gray-600 transform transition-transform duration-300"
+            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="faq-answer p-4 hidden">
+          <p>Utiliser WebNova pour créer son CV offre des modèles professionnels, un gain de temps grâce à des outils de
+            personnalisation, et la possibilité de le mettre à jour facilement en ligne. De plus, cela permet de
+            partager rapidement le CV via un lien.</p>
+        </div>
+      </div>
+
+      <!-- Question 6 -->
+      <div class="faq-item mb-4 max-w-3xl mx-auto">
+        <div
+          class="faq-question flex justify-between items-center p-4 border border-gray-300 rounded-lg cursor-pointer">
+          <p class="text-black text-lg">Comment changer mon modèle?</p>
+          <svg class="arrow-icon w-6 h-6 text-gray-600 transform transition-transform duration-300"
+            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="faq-answer p-4 hidden">
+          <p>Pour changer votre modèle de CV, choisissez un nouveau format adapté à votre secteur ou à votre style, puis
+            remplissez-le avec vos informations à jour.</p>
+        </div>
+      </div>
+
+      <!-- Question 7 -->
+      <div class="faq-item mb-4 max-w-3xl mx-auto">
+        <div
+          class="faq-question flex justify-between items-center p-4 border border-gray-300 rounded-lg cursor-pointer">
+          <p class="text-black text-lg">Comment importer mon CV?</p>
+          <svg class="arrow-icon w-6 h-6 text-gray-600 transform transition-transform duration-300"
+            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="faq-answer p-4 hidden">
+          <p>Pour importer votre CV, téléchargez-le depuis votre ordinateur ou utilisez un service en ligne (comme
+            LinkedIn ou un site de candidature). Assurez-vous qu'il soit dans un format compatible, comme PDF ou Word.
+          </p>
+        </div>
+      </div>
+
+      <!-- Question 8 -->
+      <div class="faq-item mb-4 max-w-3xl mx-auto">
+        <div
+          class="faq-question flex justify-between items-center p-4 border border-gray-300 rounded-lg cursor-pointer">
+          <p class="text-black text-lg">Comment telecharger mon CV?</p>
+          <svg class="arrow-icon w-6 h-6 text-gray-600 transform transition-transform duration-300"
+            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="faq-answer p-4 hidden">
+          <p>Pour télécharger votre CV, enregistrez-le dans le format souhaité (PDF ou Word) sur votre ordinateur.
+            Ensuite, sélectionnez l'option "Télécharger" ou "Enregistrer sous" dans votre éditeur de texte.</p>
+        </div>
+      </div>
+
+      <!-- Question 9 -->
+      <div class="faq-item mb-4 max-w-3xl mx-auto">
+        <div
+          class="faq-question flex justify-between items-center p-4 border border-gray-300 rounded-lg cursor-pointer">
+          <p class="text-black text-lg">Comment puis-je supprimer une partie de mon CV?</p>
+          <svg class="arrow-icon w-6 h-6 text-gray-600 transform transition-transform duration-300"
+            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="faq-answer p-4 hidden">
+          <p>Pour supprimer une partie de votre CV, ouvrez-le dans l'éditeur de texte, puis supprimez le texte ou la
+            section souhaitée. Enregistrez ensuite les modifications.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Septième section -->
+  <div class="bg-[#A78E7D] py-32 pt-20 px-3 pb-10 ">
+
+    <h2 class="text-[#FFFAF2] text-4xl  text-center font-semibold mb-6">Pret à creer votre CV professionnel?</h2>
+    <p class="text-lg text-[#FFFAF2]  text-center mb-8">Rejoignez des milliers de personnes qui ont déjà crée leurs CV
+      avec nous.</p>
+
+    <div class="button-container1 pt-10 pb-10">
+      <a href="public/preview.html">
+      <button class="create-cv-button1">Commencez maintenant</button>
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer section -->
+  <div id="contact" class="footer bg-[#2C2C2C] text-white py-10">
+    <div class="container mx-auto px-20">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+
+        <!-- A propos -->
+        <div class="footer-column flex flex-col">
+          <h3 class="font-bold text-xl mb-6">A propos</h3>
+          <p class="text-left leading-relaxed">WebNova est une plateforme <br> qui vous aide à créer des CV <br>
+            professionnels en quelques <br> minutes. Nos modèles sont <br> conçus pour impressionner <br> les
+            recruteurs.</p>
+        </div>
+
+        <!-- Liens utiles -->
+        <div class="footer-column flex flex-col ml-10">
+          <h3 class="font-bold text-xl mb-6">Liens utiles</h3>
+          <p class="text-left leading-relaxed">Modèles <br> Fonctionnalités <br> Tarifs <br> Contacts</p>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-column flex flex-col mr-10">
+          <h3 class="font-bold text-xl mb-6">Contact</h3>
+          <p class="text-left leading-relaxed">Email: contact@webnova.com <br> Téléphone: +237699900291</p>
+        </div>
+
+        <!-- Suivez-nous -->
+        <div class="footer-column flex flex-col">
+          <h3 class="font-bold text-xl mb-6">Suivez-nous</h3>
+          <div class="flex justify-start space-x-3">
+            <img src="./public/assets/img/I1.png" alt="Facebook" class="w-3 h-3">
+            <img src="./public/assets/img/I2.png" alt="Twitter" class="w-3 h-3">
+            <img src="./public/assets/img/I3.png" alt="Instagram" class="w-3 h-3">
+            <img src="./public/assets/img/I4.png" alt="LinkedIn" class="w-3 h-3">
           </div>
         </div>
       </div>
     </div>
-  </section>
-
-  <section class="py-20 bg-gray-100">
-    <div class="container mx-auto px-6 text-center">
-      <h2 class="text-3xl font-semibold text-gray-800 mb-12">Ce que nos clients disent</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="bg-white rounded-lg shadow-md p-6">
-          <div class="flex items-center justify-center mb-4">
-            <img src="chemin/vers/avatar1.jpg" alt="Client 1" class="w-16 h-16 rounded-full object-cover">
-          </div>
-          <p class="text-gray-600 mb-4">"J'ai créé un CV professionnel en quelques minutes. Les modèles sont modernes et
-            faciles à personnaliser."</p>
-          <h3 class="text-lg font-semibold text-gray-800">- Marie Dupont</h3>
-        </div>
-        <div class="bg-white rounded-lg shadow-md p-6">
-          <div class="flex items-center justify-center mb-4">
-            <img src="chemin/vers/avatar2.jpg" alt="Client 2" class="w-16 h-16 rounded-full object-cover">
-          </div>
-          <p class="text-gray-600 mb-4">"Les modèles sont de haute qualité et le processus de création est très
-            intuitif. Je recommande vivement ce site."</p>
-          <h3 class="text-lg font-semibold text-gray-800">- Jean Martin</h3>
-        </div>
-        <div class="bg-white rounded-lg shadow-md p-6">
-          <div class="flex items-center justify-center mb-4">
-            <img src="chemin/vers/avatar3.jpg" alt="Client 3" class="w-16 h-16 rounded-full object-cover">
-          </div>
-          <p class="text-gray-600 mb-4">"Grâce à ce site, j'ai obtenu plus d'entretiens. Mon CV a fait forte impression
-            auprès des recruteurs."</p>
-          <h3 class="text-lg font-semibold text-gray-800">- Sophie Leduc</h3>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="py-20 bg-blue-500 text-white">
-    <div class="container mx-auto px-6 text-center">
-      <h2 class="text-3xl font-semibold mb-8">Prêt à créer votre CV professionnel ?</h2>
-      <p class="text-lg mb-8">Rejoignez des milliers de personnes qui ont déjà créé leur CV avec nous.</p>
-      <a href="#"
-        class="inline-block px-8 py-3 bg-white text-blue-600 rounded-full text-lg font-semibold hover:bg-gray-100 transition duration-300">Commencer
-        maintenant</a>
-    </div>
-  </section>
-
-  <footer class="bg-gray-800 text-white py-12">
-    <div class="container mx-auto px-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div>
-          <h3 class="text-lg font-semibold mb-4">À propos</h3>
-          <p class="text-gray-300">Webnova est une plateforme qui vous aide à créer des CV professionnels en quelques
-            minutes. Nos modèles sont conçus pour impressionner les recruteurs.</p>
-        </div>
-        <div>
-          <h3 class="text-lg font-semibold mb-4">Liens utiles</h3>
-          <ul class="text-gray-300 space-y-2">
-            <li><a href="#" class="hover:text-white">Modèles</a></li>
-            <li><a href="#" class="hover:text-white">Fonctionnalités</a></li>
-            <li><a href="#" class="hover:text-white">Tarifs</a></li>
-            <li><a href="#" class="hover:text-white">Contact</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="text-lg font-semibold mb-4">Contact</h3>
-          <p class="text-gray-300">Email : contact@webnova.com</p>
-          <p class="text-gray-300">Téléphone : +237 6 51 28 12 24</p>
-        </div>
-        <div>
-          <h3 class="text-lg font-semibold mb-4">Suivez-nous</h3>
-          <div class="flex space-x-4">
-            <a href="#" class="hover:text-white"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="hover:text-white"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="hover:text-white"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="mt-8 border-t border-gray-700 pt-8 text-center">
-        <p class="text-gray-300">&copy; 2025 Webnova. Tous droits réservés.</p>
-        <a href="./public/preview.html">hello</a>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    document.getElementById('menu-toggle').addEventListener('click', function () {
-      document.getElementById('mobile-menu').classList.toggle('hidden');
-    });
-  </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
-    crossorigin="anonymous"></script>
+  </div>
 
   <!-- module -->
   <script type="module" src="/src/main.js"></script>
+
 </body>
 
 </html>
