@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 input[type="file"]::-webkit-file-upload-button {
     display: none;
 }
@@ -50,3 +52,17 @@ button {
 .invalid {
     color: #dc2626; 
 }
+
+/* date style  */
+
+.filled-date {
+    background-color: #f0fdf4;
+    border-color: #86efac !important;
+    transition: all 0.3s ease;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.6);
+    padding: 4px;
+    cursor: pointer;
+  }
