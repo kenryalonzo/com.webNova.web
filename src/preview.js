@@ -1,24 +1,3 @@
-// importation de l'image
-
-function previewImage(event) {
-    const preview = document.getElementById('preview');
-    const file = event.target.files[0];
-
-    if (file) {
-        const reader = new FileReader();
-
-        reader.onload = function() {
-            preview.src = reader.result;
-            preview.style.display = 'block';
-        }
-
-        reader.readAsDataURL(file);
-    } else {
-        preview.src = '#';
-        preview.style.display = 'none';
-    }
-}
-
 // Global logic of my program
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -108,6 +87,13 @@ document.addEventListener('DOMContentLoaded', function () {
         };
     };
 
+    // gestion du formatage de la date
+    function formatDate(dateString, defaultValue = "Non spécifié") {
+        if (!dateString) return defaultValue;
+        const options = { year: "numeric", month: "short" };
+        return new Date(dateString).toLocaleDateString("fr-FR", options);
+    }
+
     // Fonction de validation générique
     const createValidator = (id) => {
         const input = document.getElementById(id);
@@ -192,6 +178,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function isLastEntryValid(entry, fields) {
+
         return fields.every(field => {
             const input = entry.querySelector(`[data-validation-type="${field}"]`);
             if (!input) return false;
@@ -223,7 +210,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function getInputField(field) {
         if (field.includes("Desc")) {
             return `<textarea data-validation-type="${field}" rows="3"
-                    class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition-all duration-200"
+                  class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition-all duration-200"
                     placeholder="Saisissez votre description ici..."></textarea>`;
         } else if (field.includes("Date")) {
             return `<input type="date" data-validation-type="${field}" 
@@ -286,15 +273,26 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateDynamicSectionsPreview(containerId, previewId, fieldKeys, displayFunction) {
         const container = document.getElementById(containerId);
         const preview = document.getElementById(previewId);
-        if (!container || !preview) return;
-
-        preview.innerHTML = ''; // Effacer la prévisualisation existante
-
+        if (!container || !preview) {
+            console.warn(`Container (${containerId}) ou preview (${previewId}) introuvable.`);
+            return;
+        }
+        
+        // Effacer la prévisualisation existante
+        preview.innerHTML = '';
+    
+        // Parcourir chaque entrée ajoutée dans la section
         Array.from(container.children).forEach(entry => {
-            const values = fieldKeys.map(key => entry.querySelector(`[data-validation-type="${key}"]`).value.trim());
+            // Pour chaque champ, récupérer la valeur en s'assurant que l'input existe
+            const values = fieldKeys.map(key => {
+                const input = entry.querySelector(`[data-validation-type="${key}"]`);
+                return input ? input.value.trim() : '';
+            });
+            // Ajouter le contenu généré dans le conteneur preview
             preview.innerHTML += displayFunction(values);
         });
     }
+    
 
     // Fonctions d'affichage pour chaque section dynamique
     function displayAchievement(values) {
@@ -302,11 +300,25 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function displayEducation(values) {
-        return `<div class="text-sm">- ${values[0]} (${values[1]}), ${values[2]} (${values[3]} - ${values[4]}): ${values[5]}</div>`;
+        return `
+          <div class="mb-4">
+            <h4 class="font-semibold">${values[1] || 'Diplôme non spécifié'}</h4>
+            <div class="text-gray-600">${[values[0], values[2]].filter(Boolean).join(' - ')}</div>
+            <div class="text-sm text-gray-500">${formatDate(values[3])} → ${formatDate(values[4], 'Présent')}</div>
+            <p class="mt-1 text-gray-700">${values[5] || ''}</p>
+          </div>
+        `;
     }
-
+      
     function displayExperience(values) {
-        return `<div class="text-sm">- ${values[0]} at ${values[1]}, ${values[2]} (${values[3]} - ${values[4]}): ${values[5]}</div>`;
+    return `
+        <div class="mb-4">
+        <h4 class="font-semibold">${values[0] || 'Titre non spécifié'}</h4>
+        <div class="text-gray-600">${[values[1], values[2]].filter(Boolean).join(' - ')}</div>
+        <div class="text-sm text-gray-500">${formatDate(values[3])} → ${formatDate(values[4], 'Présent')}</div>
+        <p class="mt-1 text-gray-700">${values[5] || ''}</p>
+        </div>
+    `;
     }
 
     function displayProject(values) {
@@ -318,30 +330,64 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Écouteurs d'événements pour les sections dynamiques
-    sections.forEach(section => {
+    sections.forEach((section) => {
         const container = document.getElementById(section.containerId);
         if (container) {
-            container.addEventListener('input', () => {
+            container.addEventListener("input", () => {
                 let displayFunction;
                 switch (section.containerId) {
-                    case 'achievements-container': displayFunction = displayAchievement; break;
-                    case 'education-container': displayFunction = displayEducation; break;
-                    case 'experience-container': displayFunction = displayExperience; break;
-                    case 'projects-container': displayFunction = displayProject; break;
-                    case 'skills-container': displayFunction = displaySkill; break;
+                    case "experience-container":
+                        displayFunction = displayExperience;
+                        break;
+                    case "education-container":
+                        displayFunction = displayEducation;
+                        break;
+                    case "achievements-container":
+                        displayFunction = displayAchievement;
+                        break;
+                    case "projects-container":
+                        displayFunction = displayProject;
+                        break;
+                    case "skills-container":
+                        displayFunction = displaySkill;
+                        break;
+                    default:
+                        return;
                 }
-                updateDynamicSectionsPreview(section.containerId, `${section.containerId.replace('-container', '')}_dsp`, section.fields, displayFunction);
+                updateDynamicSectionsPreview(
+                    section.containerId,
+                    section.containerId === 'education-container' ? 'preview-educations' : section.containerId === 'experience-container' ? 'preview-experiences' : `${section.containerId.replace('-container', '')}_dsp`,
+                    section.fields,
+                    displayFunction
+                );
             });
-            container.addEventListener('change', () => {
+            container.addEventListener("change", () => {
                 let displayFunction;
                 switch (section.containerId) {
-                    case 'achievements-container': displayFunction = displayAchievement; break;
-                    case 'education-container': displayFunction = displayEducation; break;
-                    case 'experience-container': displayFunction = displayExperience; break;
-                    case 'projects-container': displayFunction = displayProject; break;
-                    case 'skills-container': displayFunction = displaySkill; break;
+                    case "experience-container":
+                        displayFunction = displayExperience;
+                        break;
+                    case "education-container":
+                        displayFunction = displayEducation;
+                        break;
+                    case "achievements-container":
+                        displayFunction = displayAchievement;
+                        break;
+                    case "projects-container":
+                        displayFunction = displayProject;
+                        break;
+                    case "skills-container":
+                        displayFunction = displaySkill;
+                        break;
+                    default:
+                        return;
                 }
-                updateDynamicSectionsPreview(section.containerId, `${section.containerId.replace('-container', '')}_dsp`, section.fields, displayFunction);
+                updateDynamicSectionsPreview(
+                    section.containerId,
+                    section.containerId === 'education-container' ? 'preview-educations' : section.containerId === 'experience-container' ? 'preview-experiences' : `${section.containerId.replace('-container', '')}_dsp`,
+                    section.fields,
+                    displayFunction
+                );
             });
         }
     });
@@ -356,6 +402,17 @@ document.addEventListener('DOMContentLoaded', function () {
             case 'projects-container': displayFunction = displayProject; break;
             case 'skills-container': displayFunction = displaySkill; break;
         }
-        updateDynamicSectionsPreview(section.containerId, `${section.containerId.replace('-container', '')}_dsp`, section.fields, displayFunction);
+        updateDynamicSectionsPreview(
+            section.containerId,
+            section.containerId === 'education-container' ? 'preview-educations' : section.containerId === 'experience-container' ? 'preview-experiences' : `${section.containerId.replace('-container', '')}_dsp`,
+            section.fields,
+            displayFunction
+        );
     });
+
+    // Ajouter à la fin du DOMContentLoaded, avant le dernier });
+    document.querySelectorAll('[data-validation-type*="Date"]').forEach(dateInput => {
+        dateInput.classList.toggle('filled-date', !!dateInput.value);
+    });
+
 });
