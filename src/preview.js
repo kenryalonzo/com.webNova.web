@@ -393,3 +393,54 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 });
+
+
+//printCv for preview section
+
+function printCV() {
+    const printContent = document.getElementById('preview-sc').outerHTML;
+    const printWindow = window.open('', '_blank', 'width=1200,height=600');
+    
+    // Récupérer les styles Tailwind compilés
+    const styles = Array.from(document.querySelectorAll('style[data-vite-dev-id*="tailwind"], link[rel=stylesheet]'))
+        .map(style => style.outerHTML)
+        .join('\n');
+
+    printWindow.document.write(`
+        <html>
+            <head>
+                <title>CV - ${document.getElementById('fullname_dsp').textContent}</title>
+                ${styles}
+                <style>
+                    @media print {
+                        body { 
+                            margin: 0 !important;
+                            padding: 0 !important;
+                            -webkit-print-color-adjust: exact;
+                        }
+                        .print-btn-sc { display: none !important; }
+                        .print_area {
+                            box-shadow: none !important;
+                            padding: 20px !important;
+                        }
+                        .bg-beige { background-color: #f5f5dc !important; }
+                        * { -webkit-print-color-adjust: exact; }
+                    }
+                </style>
+            </head>
+            <body class="bg-white">
+                ${printContent}
+                <script>
+                    window.addEventListener('load', function() {
+                        setTimeout(function() {
+                            window.print();
+                            window.close();
+                        }, 1000);
+                    });
+                <\/script>
+            </body>
+        </html>
+    `);
+
+    printWindow.document.close();
+}

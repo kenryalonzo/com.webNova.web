@@ -66,3 +66,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding: 4px;
     cursor: pointer;
   }
+
+  @media print {
+    .print-btn-sc { display: none !important; }
+    .print_area { 
+        margin: 0 !important;
+        padding: 20px !important;
+    }
+}
