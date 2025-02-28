@@ -171,6 +171,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
             removeButton.addEventListener('click', function () {
                 container.removeChild(newEntry);
+                updateDynamicSectionsPreview(
+                    section.containerId,
+                    section.containerId === 'education-container' ? 'preview-educations' : section.containerId === 'experience-container' ? 'preview-experiences' : `${section.containerId.replace('-container', '')}_dsp`,
+                    section.fields,
+                    getDisplayFunction(section.containerId)
+                );
             });
 
             container.appendChild(newEntry);
@@ -328,65 +334,36 @@ document.addEventListener('DOMContentLoaded', function () {
     function displaySkill(values) {
         return `<div class="text-sm">- ${values[0]}</div>`;
     }
+    
+    function getDisplayFunction(containerId) {
+        switch (containerId) {
+            case 'achievements-container': return displayAchievement;
+            case 'education-container': return displayEducation;
+            case 'experience-container': return displayExperience;
+            case 'projects-container': return displayProject;
+            case 'skills-container': return displaySkill;
+            default: return () => '';
+        }
+    }
 
     // Écouteurs d'événements pour les sections dynamiques
     sections.forEach((section) => {
         const container = document.getElementById(section.containerId);
         if (container) {
             container.addEventListener("input", () => {
-                let displayFunction;
-                switch (section.containerId) {
-                    case "experience-container":
-                        displayFunction = displayExperience;
-                        break;
-                    case "education-container":
-                        displayFunction = displayEducation;
-                        break;
-                    case "achievements-container":
-                        displayFunction = displayAchievement;
-                        break;
-                    case "projects-container":
-                        displayFunction = displayProject;
-                        break;
-                    case "skills-container":
-                        displayFunction = displaySkill;
-                        break;
-                    default:
-                        return;
-                }
                 updateDynamicSectionsPreview(
                     section.containerId,
                     section.containerId === 'education-container' ? 'preview-educations' : section.containerId === 'experience-container' ? 'preview-experiences' : `${section.containerId.replace('-container', '')}_dsp`,
                     section.fields,
-                    displayFunction
+                    getDisplayFunction(section.containerId)
                 );
             });
             container.addEventListener("change", () => {
-                let displayFunction;
-                switch (section.containerId) {
-                    case "experience-container":
-                        displayFunction = displayExperience;
-                        break;
-                    case "education-container":
-                        displayFunction = displayEducation;
-                        break;
-                    case "achievements-container":
-                        displayFunction = displayAchievement;
-                        break;
-                    case "projects-container":
-                        displayFunction = displayProject;
-                        break;
-                    case "skills-container":
-                        displayFunction = displaySkill;
-                        break;
-                    default:
-                        return;
-                }
                 updateDynamicSectionsPreview(
                     section.containerId,
                     section.containerId === 'education-container' ? 'preview-educations' : section.containerId === 'experience-container' ? 'preview-experiences' : `${section.containerId.replace('-container', '')}_dsp`,
                     section.fields,
-                    displayFunction
+                    getDisplayFunction(section.containerId)
                 );
             });
         }
